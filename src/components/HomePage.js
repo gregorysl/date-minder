@@ -35,6 +35,7 @@ const HomePage = () => {
       <h1>Days since Natka was born: {days}</h1>
       <h1>Weeks since Natka was born: {weeks}</h1>
       <h1>Months since Natka was born: {months}</h1>
+        <AddDatePage />
     </div>
   );
 };
