@@ -1,23 +1,31 @@
 import {createStore, compose, applyMiddleware} from 'redux';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
+import allSagas from '../sagas';
 
 function configureStoreProd(initialState) {
+  const saga = createSagaMiddleware();
   const middlewares = [
-    thunk,
+    saga,
   ];
 
-  return createStore(rootReducer, initialState, compose(
+  const store = createStore(rootReducer, initialState, compose(
     applyMiddleware(...middlewares)
     )
   );
+  saga.run(function * () {
+    yield allSagas;
+  }); 
+  return store;
 }
 
+
 function configureStoreDev(initialState) {
+  const saga = createSagaMiddleware();
   const middlewares = [
     reduxImmutableStateInvariant(),
-    thunk,
+    saga,
   ];
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
@@ -33,6 +41,9 @@ function configureStoreDev(initialState) {
     });
   }
 
+  saga.run(function * () {
+    yield allSagas;
+  }); 
   return store;
 }
 
