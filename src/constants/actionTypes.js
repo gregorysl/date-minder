@@ -1,2 +1,8 @@
 export const SAVE_FUEL_SAVINGS = 'SAVE_FUEL_SAVINGS';
 export const CALCULATE_FUEL_SAVINGS = 'CALCULATE_FUEL_SAVINGS';
+
+export const FETCH_DATA = 'FETCH_DATA';
+export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
+export const ADD_DATE = 'ADD_DATE';
+
+
