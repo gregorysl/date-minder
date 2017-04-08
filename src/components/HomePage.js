@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import AddDatePage from './AddDatePage'
+import DatesPage from './DatesPage';
 
 function weeks_between(date1, date2) {
   const ONE_WEEK = 1000 * 60 * 60 * 24 * 7;
@@ -35,7 +35,7 @@ const HomePage = () => {
       <h1>Days since Natka was born: {days}</h1>
       <h1>Weeks since Natka was born: {weeks}</h1>
       <h1>Months since Natka was born: {months}</h1>
-        <AddDatePage />
+        <DatesPage />
     </div>
   );
 };
