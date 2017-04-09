@@ -1,6 +1,6 @@
 const db = function () {
     let localData = JSON.parse(localStorage.getItem("data"));
-    return localData || { index: 0 };
+    return localData || { index: 0, items: [] };
 };
 const save = function (data) {
     localStorage.setItem("data", JSON.stringify(data));
@@ -8,22 +8,30 @@ const save = function (data) {
 let server = {
     add(item) {
         const data = db();
-        data.index++;
         item.id = data.index;
-        data[data.index] = item;
+        data.index++;
+        data.items.push(item);
         save(data);
         return data;
     },
     update(item) {
         const id = item.id;
         const data = db();
-        data[id] = item;
+        for (let i in data.items) {
+            if (data.items[i].id == id) {
+                data.items[id] = item;
+            }
+        }
         save(data);
         return data;
     },
     delete(id) {
         const data = db();
-        delete data[id];
+        for (let i in data.items) {
+            if (data.items[i].id == id) {
+                delete data.items[id];
+            }
+        }
         save(data);
         return data;
     },
