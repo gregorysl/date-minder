@@ -3,7 +3,7 @@ import { Item } from './Item';
 
 
 const ListData = (props) => {
-    let taskItems = props.tasks.items.map((task, index) => {
+    let taskItems = props.tasks.map((task, index) => {
         return (
             <Item key={index}
                 task={task}
