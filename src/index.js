@@ -5,16 +5,21 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 import configureStore from './store/configureStore';
-require('./favicon.ico'); // Tell webpack to load favicon.ico
-import './styles/styles.scss'; // Yep, that's right. You can import SASS/CSS files too! Webpack will run the associated loader and plug this into the page.
+import { LocaleProvider } from 'antd';
 import { syncHistoryWithStore } from 'react-router-redux';
+import enUS from 'antd/lib/locale-provider/en_US';
+import 'antd/dist/antd.less';
+import './styles/styles.less';
+require('./favicon.ico');
 
 const store = configureStore();
-
 const history = syncHistoryWithStore(browserHistory, store);
 
 render(
-  <Provider store={store}>
-    <Router history={history} routes={routes} />
-  </Provider>, document.getElementById('app')
+  <LocaleProvider locale={enUS}>
+    <Provider store={store}>
+      <Router history={history} routes={routes} />
+    </Provider>
+  </LocaleProvider>,
+  document.getElementById('app')
 );
