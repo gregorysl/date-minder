@@ -1,14 +1,18 @@
 import React from 'react';
-import { Checkbox, CheckboxGroup } from 'react-checkbox-group';
-import DatePicker from 'react-datepicker';
+//import { Checkbox, CheckboxGroup } from 'react-checkbox-group';
+//import DatePicker from 'react-datepicker';
+import { Button, Checkbox, DatePicker } from 'antd';
+const CheckboxGroup = Checkbox.Group;
 
-require('react-datepicker/dist/react-datepicker.css');
+//require('react-datepicker/dist/react-datepicker.css');
 
 class AddDatePage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { item: { title: '', fruits: ['watermelon'] } };
+    this.state = { item: { title: '', fruits: [] } };
+    this.options = ['Apple', 'Pear', 'Orange'];
+
     this.titleChange = this.titleChange.bind(this);
     this.dateChange = this.dateChange.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
@@ -24,8 +28,9 @@ class AddDatePage extends React.Component {
   titleChange(event) {
     this.setState({ item: { ...this.state.item, title: event.target.value } });
   }
-  dateChange(date) {
-    this.setState({ item: { ...this.state.item, date: date } });
+  dateChange(date, dateString) {
+    debugger;
+    this.setState({ item: { ...this.state.item, date: dateString } });
   }
 
   handleKeyUp(event) {
@@ -40,26 +45,12 @@ class AddDatePage extends React.Component {
   }
   render() {
     return (
-      <form className="task-form" onSubmit={this.handleSubmit} noValidate>
-        <DatePicker selected={this.state.item.date} onChange={this.dateChange} />
-        <input
-          autoComplete="off"
-          autoFocus
-          className="task-form__input"
-          maxLength="64"
-          onChange={this.titleChange}
-          onKeyUp={this.handleKeyUp}
-          placeholder="What needs to be done?"
-          type="text"
-          value={this.state.item.title}
-        />
-        <CheckboxGroup name="fruits" value={this.state.item.fruits} onChange={this.fruitsChanged}>
-          <label><Checkbox value="apple" />Apple</label>
-          <label><Checkbox value="orange" />Orange</label>
-          <label><Checkbox value="watermelon" />Watermelon</label>
-        </CheckboxGroup>
-        <button type="submit" >Submint</button>
-      </form>
+      <div>
+        <DatePicker value={this.state.item.date} onChange={this.dateChange} />
+        <input autoFocus onChange={this.titleChange} onKeyUp={this.handleKeyUp} placeholder="Title" type="text" value={this.state.item.title} />
+        <CheckboxGroup options={this.options} defaultValue={this.state.item.fruits} onChange={this.fruitsChanged} />
+        <Button onClick={this.handleSubmit} >Submit</Button>
+      </div>
     );
   }
 }
