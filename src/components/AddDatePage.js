@@ -1,10 +1,6 @@
 import React from 'react';
-//import { Checkbox, CheckboxGroup } from 'react-checkbox-group';
-//import DatePicker from 'react-datepicker';
 import { Button, Checkbox, DatePicker } from 'antd';
 const CheckboxGroup = Checkbox.Group;
-
-//require('react-datepicker/dist/react-datepicker.css');
 
 class AddDatePage extends React.Component {
   constructor(props, context) {
@@ -29,7 +25,6 @@ class AddDatePage extends React.Component {
     this.setState({ item: { ...this.state.item, title: event.target.value } });
   }
   dateChange(date, dateString) {
-    debugger;
     this.setState({ item: { ...this.state.item, date: dateString } });
   }
 
@@ -38,7 +33,6 @@ class AddDatePage extends React.Component {
   }
 
   handleSubmit(event) {
-    debugger
     event.preventDefault();
     this.props.handleSubmit(this.state.item);
     this.clearInput();
