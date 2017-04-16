@@ -1,6 +1,10 @@
 import React from 'react';
 import { Button, Checkbox, DatePicker } from 'antd';
 const CheckboxGroup = Checkbox.Group;
+import moment from 'moment';
+
+import 'moment/locale/en-gb';
+moment.locale('en-gb');
 
 class AddDatePage extends React.Component {
   constructor(props, context) {
@@ -38,9 +42,10 @@ class AddDatePage extends React.Component {
     this.clearInput();
   }
   render() {
+    const pickerValue = this.state.item.date? moment(this.state.item.date):null;
     return (
       <div>
-        <DatePicker value={this.state.item.date} onChange={this.dateChange} />
+        <DatePicker value={pickerValue} onChange={this.dateChange} />
         <input autoFocus onChange={this.titleChange} onKeyUp={this.handleKeyUp} placeholder="Title" type="text" value={this.state.item.title} />
         <CheckboxGroup options={this.options} defaultValue={this.state.item.fruits} onChange={this.fruitsChanged} />
         <Button onClick={this.handleSubmit} >Submit</Button>
